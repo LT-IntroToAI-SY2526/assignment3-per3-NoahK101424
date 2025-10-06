@@ -220,6 +220,26 @@ def title_by_actor(matches: List[str]) -> List[str]:
                 result.append(get_title(movie))
     return result
 
+def title_by_actorCount(matches: List[str]) -> List[str]:
+    """Finds titles of movies with a certain number of actors
+    Args:
+        matches - a list of 1 string, just the number of actors
+
+    Returns: 
+        A list of movie titles that have a certain number of actors
+    """
+
+    result = []
+    actor_Num = int(matches[0])
+
+    for movie in movie_db:
+        count = 0
+        for i in get_actors(movie):
+            count += 1
+        if count == actor_Num:
+            result.append(get_title(movie))
+    return result
+
 
 # dummy argument is ignored and doesn't matter
 def bye_action(dummy: List[str]) -> None:
@@ -241,6 +261,10 @@ pa_list: List[Tuple[List[str], Callable[[List[str]], List[Any]]]] = [
     (str.split("who acted in %"), actors_by_title),
     (str.split("when was % made"), year_by_title),
     (str.split("in what movies did % appear"), title_by_actor),
+    
+    #My personal function
+    (str.split("In what movies did _ actors appear"), title_by_actorCount),
+
     (["bye"], bye_action),
 ]
 
@@ -345,5 +369,9 @@ if __name__ == "__main__":
     assert sorted(
         search_pa_list(["what", "movies", "were", "made", "in", "2020"])
     ) == sorted(["No answers"]), "failed search_pa_list test 3"
+
+    #my personal assert
+    assert sorted(title_by_actorCount(["9"])) == sorted(["casablanca"]), "failed title_by_actorCount test"
+
 
     print("All tests passed!")

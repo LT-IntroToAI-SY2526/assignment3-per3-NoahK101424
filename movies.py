@@ -435,4 +435,16 @@ movie_db: List[Tuple[str, str, int, List[str]]] = [
             "spike lee",
         ],
     ),
+    (
+        "Coraline",
+        "Henry Selick",
+        2009,
+        [
+            "Dakota Fanning",
+            "Teri Hatcher",
+            "Jennifer Saunders",
+            "Dawn French",
+            "Ian McShane",
+        ],
+    ),
 ]
